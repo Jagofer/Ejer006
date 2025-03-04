@@ -1,0 +1,48 @@
+package es.santander.ejerc_006.repository;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.mockito.Mock;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import es.santander.ascender.ejerc_006.controller.AulaController;
+import es.santander.ascender.ejerc_006.model.Aula;
+import es.santander.ascender.ejerc_006.service.AulaService;
+
+@ExtendWith(MockitoExtension.class)
+@WebMvcTest(AulaController.class)
+public class AulaControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Mock
+    private AulaService aulaService;
+
+    private Aula aula;
+
+    @BeforeEach
+    void setUp() {
+        aula = new Aula();
+        aula.setId(1L);
+        aula.setNombre("Aula 101");
+    }
+
+    @Test
+    void testGetAulaById() throws Exception {
+        when(aulaService.read(1L)).thenReturn(aula);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/aula/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+}
