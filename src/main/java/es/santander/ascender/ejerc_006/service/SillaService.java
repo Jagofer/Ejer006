@@ -18,7 +18,7 @@ public class SillaService {
 
     public Silla create(Silla silla) {
         if (silla.getId() != null) {
-            throw new CrudSecurityException("Han tratado de modificar un registro columna utilizando la creación",
+            throw new CrudSecurityException("Han tratado de modificar un registro columna creándolo",
                     CRUDOperation.CREATE,
                     silla.getId());
         }
@@ -37,7 +37,7 @@ public class SillaService {
 
     public Silla update(Silla silla) {
         if (silla.getId() == null) {
-            throw new CrudSecurityException("Han tratado de crear un registro columna utilizando la modifición",
+            throw new CrudSecurityException("Han tratado de crear un registro columna modificándolo",
                     CRUDOperation.UPDATE,
                     null);
 

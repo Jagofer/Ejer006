@@ -18,7 +18,7 @@ public class AulaService {
 
     public Aula create(Aula aula) {
         if (aula.getId() != null) {
-            throw new CrudSecurityException("Han tratado de modificar un registro columna utilizando la creación",
+            throw new CrudSecurityException("Han tratado de modificar un registro columna creándolo",
                     CRUDOperation.CREATE,
                     aula.getId());
         }
@@ -37,7 +37,7 @@ public class AulaService {
 
     public Aula update(Aula aula) {
         if (aula.getId() == null) {
-            throw new CrudSecurityException("Han tratado de crear un registro columna utilizando la modifición",
+            throw new CrudSecurityException("Han tratado de crear un registro columna modificándolo",
                     CRUDOperation.UPDATE,
                     null);
 

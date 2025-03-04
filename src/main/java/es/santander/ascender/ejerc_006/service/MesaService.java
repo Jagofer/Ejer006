@@ -23,7 +23,7 @@ public class MesaService {
 
     public Mesa create(Mesa mesa) {
         if (mesa.getId() != null) {
-            throw new CrudSecurityException("Han tratado de modificar un registro columna utilizando la creación",
+            throw new CrudSecurityException("Han tratado de modificar un registro columna creándolo",
                     CRUDOperation.CREATE,
                     mesa.getId());
         }
@@ -42,7 +42,7 @@ public class MesaService {
 
     public Mesa update(Mesa mesa) {
         if (mesa.getId() == null) {
-            throw new CrudSecurityException("Han tratado de crear un registro columna utilizando la modifición",
+            throw new CrudSecurityException("Han tratado de crear un registro columna modificándolo",
                     CRUDOperation.UPDATE,
                     null);
 
@@ -57,10 +57,10 @@ public class MesaService {
 
     public void moverMesa(Long mesaId, Long nuevaAulaId) {
         Mesa mesa = mesaRepository.findById(mesaId)
-                .orElseThrow(() -> new RuntimeException("Mesa no encontrada"));
+                .orElseThrow(() -> new RuntimeException("No se ha encontrado la mesa"));
 
         Aula nuevaAula = aulaRepository.findById(nuevaAulaId)
-                .orElseThrow(() -> new RuntimeException("Aula no encontrada"));
+                .orElseThrow(() -> new RuntimeException("No se ha encontrado el aula"));
 
         mesa.setAula(nuevaAula);  // Cambiar el aula de la mesa
         mesaRepository.save(mesa);
